@@ -1,5 +1,13 @@
-version: "3"
+version: "3.9"
 
 services:
   bot:
     build: .
+    networks:
+      - wiki_network
+
+networks:
+  wiki_network:
+    name: wiki_mediawiki
+    external: true
+
