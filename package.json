@@ -1,0 +1,14 @@
+{
+  "name": "words-bot",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "mariadb": "^3.1.2",
+    "node-cron": "^3.0.2"
+  }
+}
