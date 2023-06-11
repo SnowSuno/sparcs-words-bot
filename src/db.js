@@ -8,12 +8,20 @@ const pool = mariadb.createPool({
   connectionLimit: 1,
 });
 
-export const testQuery = async () => {
+
+export const getWordsText = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
-    const rows = await conn.query("SELECT 1 as val");
-    return rows;
+    return await conn.query(`
+        SELECT old_text
+        FROM page
+                 JOIN revision ON page.page_latest = revision.rev_id
+                 JOIN content ON revision.rev_sha1 = content.content_sha1
+                 JOIN text
+                      ON SUBSTRING_INDEX(content.content_address, ":", -1) = text.old_id
+        WHERE page.page_title = 'Words';
+    `);
   } catch (err) {
     throw err;
   } finally {
