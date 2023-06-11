@@ -12,6 +12,6 @@ export const sendMessage = (text) => axios.post(
   }
 );
 
-const formatText = (text) => ">*" + text
+const formatText = (text) => "> *" + text
   .replaceAll(/\[\[([^\]\[]+)]]/g, "<https://wiki.sparcs.org/index.php/$1>")
-  .replace(" - ", "*\\n>- ");
+  .replace(" - ", "* \n> - ");
