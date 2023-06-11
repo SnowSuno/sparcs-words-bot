@@ -13,7 +13,7 @@ export const getWordsText = async () => {
   let conn;
   try {
     conn = await pool.getConnection();
-    return await conn.query(`
+    const res =  await conn.query(`
         SELECT old_text
         FROM page
                  JOIN revision ON page.page_latest = revision.rev_id
@@ -22,6 +22,7 @@ export const getWordsText = async () => {
                       ON SUBSTRING_INDEX(content.content_address, ":", -1) = text.old_id
         WHERE page.page_title = 'Words';
     `);
+    return res[0].old_text.toString();
   } catch (err) {
     throw err;
   } finally {
